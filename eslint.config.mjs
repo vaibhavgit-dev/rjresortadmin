@@ -6,9 +6,10 @@ import { FlatCompat } from "@eslint/eslintrc";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Create a FlatCompat instance for compatibility with legacy configs
+// Create a FlatCompat instance
 const compat = new FlatCompat({
   baseDirectory: __dirname, // Set the base directory to the current directory
+  recommendedConfig: { extends: ["eslint:recommended"] }, // Provide recommended rules
 });
 
 // Extend configurations for ESLint
