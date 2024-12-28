@@ -16,10 +16,6 @@ const Page = () => {
     const [activeTab, setActiveTab] = useState("Dashboard");
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    if (!session) {
-        return <p>Access Denied</p>;
-    }
-
     // Sidebar tabs
     const tabs = useMemo(() => [
         { name: "Dashboard", icon: <FaTachometerAlt /> },
@@ -50,6 +46,11 @@ const Page = () => {
     const handleDropdownToggle = () => {
         setDropdownOpen((prev) => !prev);
     };
+
+    // Conditional rendering based on session
+    if (!session) {
+        return <p>Access Denied</p>;
+    }
 
     return (
         <div className="flex h-screen">
