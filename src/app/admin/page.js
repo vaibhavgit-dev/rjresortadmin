@@ -6,10 +6,14 @@ import {
     FaTachometerAlt,
     FaBox,
     FaUser,
-    FaBlog,
     FaCalendarAlt,
     FaImage,
 } from "react-icons/fa";
+import Dashboard from "../components/dashboard/dashboard";
+import Hotelrooms from "../components/hotelrooms/hotelrooms";
+import Allpages from "../components/allpages/allpages";
+import Bookings from "../components/bookings/bookings";
+import Gallery from "../components/gallery/gallery";
 
 const Page = () => {
     const { data: session } = useSession();
@@ -17,13 +21,16 @@ const Page = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     // Sidebar tabs
-    const tabs = useMemo(() => [
-        { name: "Dashboard", icon: <FaTachometerAlt /> },
-        { name: "Hotel", icon: <FaBox /> },
-        { name: "Pages", icon: <FaUser /> },
-        { name: "Bookings", icon: <FaCalendarAlt /> },
-        { name: "Gallery", icon: <FaImage /> },
-    ], []);
+    const tabs = useMemo(
+        () => [
+            { name: "Dashboard", icon: <FaTachometerAlt /> },
+            { name: "Hotel", icon: <FaBox /> },
+            { name: "Pages", icon: <FaUser /> },
+            { name: "Bookings", icon: <FaCalendarAlt /> },
+            { name: "Gallery", icon: <FaImage /> },
+        ],
+        []
+    );
 
     // Close dropdown on outside click
     useEffect(() => {
@@ -45,6 +52,24 @@ const Page = () => {
     // Handle dropdown toggle
     const handleDropdownToggle = () => {
         setDropdownOpen((prev) => !prev);
+    };
+
+    // Map activeTab to corresponding component
+    const renderActiveTabContent = () => {
+        switch (activeTab) {
+            case "Dashboard":
+                return <Dashboard />;
+            case "Hotel":
+                return <Hotelrooms />;
+            case "Pages":
+                return <Allpages />;
+            case "Bookings":
+                return <Bookings />;
+            case "Gallery":
+                return <Gallery />;
+            default:
+                return <p>Unknown Tab</p>;
+        }
     };
 
     // Conditional rendering based on session
@@ -117,7 +142,7 @@ const Page = () => {
 
                 {/* Page Content */}
                 <main className="flex-1 p-6">
-                    <h2 className="text-2xl font-semibold text-black">{activeTab} List</h2>
+                    {renderActiveTabContent()}
                 </main>
             </div>
         </div>

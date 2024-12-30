@@ -12,8 +12,8 @@ export const options = {
             async authorize(credentials) {
                 const user = {
                     id: "1",
-                    name: "Vaibhav",
-                    email: "vaibhav@hibiscus.services",
+                    name: "Rj Resort Admin",
+                    email: "rjresort@gmail.com",
                     password: "12345678",
                 };
 
